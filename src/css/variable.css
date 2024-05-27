@@ -1,10 +1,6 @@
 :root {
-    --color-button-disabled: #060606;
-    --color-button-disabled-background: #403c3b;
-    --color-chips-background: #3d3b3a;
-    --color-primary: #00e6dc;
-    --color-secondary: #ffffff00;
-    --color--green-light: #00ffb9;
+    --color-primary: #AAD7D9;
+    --color-white: #ffffff;
     --color-black: #3d3d3d;
     --color-grey: #bab8b2;
 }

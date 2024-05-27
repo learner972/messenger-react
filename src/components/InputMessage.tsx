@@ -1,29 +1,28 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const InputContainer = styled.div`
+const MessageWrapper = styled.div`
   padding: 10px;
   display: flex;
 `;
 
 const TextInput = styled.input`
   flex: 1;
-  padding: 10px;
-  border: 1px solid #ccc;
+  padding: 1rem;
+  border: 1px solid var(--color-grey);
   border-radius: 5px;
-  margin-right: 10px;
+  margin-right: 1rem;
 `;
 
 const SendButton = styled.button`
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #007bff;
-  color: white;
+  background-color: var(--color-primary);
   cursor: pointer;
 `;
 
-const MessageInput = ({ onSendMessage }: { onSendMessage: (message: string) => void }) => {
+const InputMessage = ({ onSendMessage }: { onSendMessage: (message: string) => void }) => {
     const [message, setMessage] = useState('');
 
     const handleSend = () => {
@@ -34,21 +33,21 @@ const MessageInput = ({ onSendMessage }: { onSendMessage: (message: string) => v
     };
 
     return (
-        <InputContainer>
+        <MessageWrapper>
             <TextInput
                 type="text"
                 value={message}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMessage(e.target.value)}
-                placeholder="Type a message..."
-                onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                placeholder="Type a message"
+                onKeyDownCapture={(e: React.KeyboardEvent<HTMLInputElement>) => {
                     if (e.key === 'Enter') {
                         handleSend();
                     }
                 }}
             />
             <SendButton onClick={handleSend}>Send</SendButton>
-        </InputContainer>
+        </MessageWrapper>
     );
 };
 
-export default MessageInput;
+export default InputMessage;

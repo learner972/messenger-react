@@ -1,19 +1,19 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-const FriendListContainer = styled.div`
+const FriendListWrapper = styled.div`
   width: 25rem;
-  border-right: 1px solid #ccc;
-  border-bottom: 1px solid #bab8b2;
+  border-right: 1px solid var(--color-grey);
+  border-bottom: 1px solid var(--color-grey);
 `;
 
 const FriendItem = styled.div`
   padding: 1rem;
   font-size: 1.4rem;
-  border-bottom: 1px solid #bab8b2;
+  border-bottom: 1px solid var(--color-grey);
   cursor: pointer;
   &:hover {
-    background-color: #f0f0f0;
+    background-color: var(--color-primary) !important;
   }
 `;
 
@@ -24,16 +24,16 @@ const FriendList = ({ friends, setActiveFriend }: { friends: string[], setActive
     setActiveFriend(friend);
   }
   return (
-    <FriendListContainer>
+    <FriendListWrapper>
       {friends.map((friend, index) => (
         <FriendItem key={friend} onClick={() => handleBgColorChange(friend, index)}
           style={{
-            background: state === index ? '#00e6dc' : 'white'
+            background: state === index ? 'var(--color-primary)' : 'var(--color-white)'
           }}>
           {friend}
         </FriendItem>
       ))}
-    </FriendListContainer>
+    </FriendListWrapper>
   );
 };
 

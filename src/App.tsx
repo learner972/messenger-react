@@ -1,21 +1,22 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+
 import ChatWindow from './components/ChatWindow';
-import MessageInput from './components/MessageInput';
+import InputMessage from './components/InputMessage';
 import FriendList from './components/FriendList';
 
-const AppContainer = styled.div`
+const AppWrapper = styled.div`
   display: flex;
   height: 100vh;
 `;
 
-const ChatContainer = styled.div`
+const ChatWrapper = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
 `;
 
-const NoFriendSelection = styled.div`
+const DefaultView = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -40,7 +41,7 @@ const App = () => {
     if (activeFriend) {
       setMessages((prevMessages: any) => ({
         ...prevMessages,
-        [activeFriend]: [...prevMessages[activeFriend], { from: 'Me', text: message }]
+        [activeFriend]: [...prevMessages[activeFriend], { from: 'Me', text: message , id: activeFriend }]
       }));
     }
   };
@@ -51,15 +52,21 @@ const App = () => {
 
 
   return (
-    <AppContainer>
+    <AppWrapper>
       <FriendList friends={friends} setActiveFriend={handleSetActiveFriend} /> {/* Add the FriendList component */}
-      <ChatContainer>
+      <ChatWrapper>
         {!activeFriend &&
-          <NoFriendSelection> Select User to Chat Now</NoFriendSelection>}
-          {activeFriend && <ChatWindow messages={messages[activeFriend] || []} />}
-        {activeFriend && <MessageInput onSendMessage={handleSendMessage} />}
-      </ChatContainer>
-    </AppContainer>
+          <DefaultView> Select User to Chat Now</DefaultView>}
+          {
+            activeFriend && (
+              <>
+              <ChatWindow messages={messages[activeFriend] || []} />
+              <InputMessage onSendMessage={handleSendMessage} />
+              </>
+            )
+          }
+      </ChatWrapper>
+    </AppWrapper>
   );
 };
 
